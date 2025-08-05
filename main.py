@@ -42,12 +42,21 @@ def main():
     with open(order_file, 'r') as file:
         order_text = file.read()
 
+    # Import and run the market-specific parser
     parser_module = import_module(f'parsers.{market.lower()}')
     order_data = parser_module.parse_order(order_text)
 
-    print("\nParsed order data:")
+    # Explicitly store the market
+    order_data['market'] = market
+
+#    print("\nParsed order data:")
+    print("\nFULL PARSED ORDER DATA:", order_data)
     for key, value in order_data.items():
         print(f"{key}: {value}")
+
+    # Import and run the market-specific Excel exporter
+    excel_module = import_module(f'excel_exports.{market.lower()}_excel')
+    excel_module.append_order_to_excel(order_data)
 
 if __name__ == "__main__":
     main()
