@@ -1,6 +1,7 @@
 import os
 from importlib import import_module
 
+
 def select_market():
     print("Please select a market:")
     markets = ['DH', 'NXS', 'ARG', 'ATL', 'BOP', 'TZN', 'AWAZ', 'ANU', 'PRIME', 'VOR', 'MARS', 'EUPH']
@@ -57,6 +58,10 @@ def main():
     # Import and run the market-specific Excel exporter
     excel_module = import_module(f'excel_exports.{market.lower()}_excel')
     excel_module.append_order_to_excel(order_data)
+    # Import and run market-specific PDF exporter
+    pdf_module = import_module(f'pdf_exports.{market.lower()}_pdf')
+    pdf_module.generate_pdf(order_data)
+
 
 if __name__ == "__main__":
     main()
