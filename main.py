@@ -1,5 +1,14 @@
 import os
+import sys
 from importlib import import_module
+
+# Ensure the directory containing this script is searched first when importing
+# modules. This avoids accidentally pulling in similarly named third-party
+# packages (for example a pip-installed "shipping" package) which can lead to
+# missing attributes like the ``create_shipment`` function used below.
+sys.path.insert(0, os.path.dirname(__file__))
+
+
 
 
 def select_market():

@@ -26,6 +26,8 @@ def append_order_to_excel(order_data):
         'Shipping Carrier': order_data.get('carrier'),
         'Shipping Service': order_data.get('service'),
         'Shipping Rate (USD)': order_data.get('rate'),
+        'Parcel Size': order_data.get('parcel_size'),
+        'Parcel Key': order_data.get('parcel_key'),
         'Tracking Code': order_data.get('tracking_code'),
         'Tracking URL': order_data.get('tracking_url'),
         'Label URL': order_data.get('label_url'),
@@ -36,6 +38,7 @@ def append_order_to_excel(order_data):
         'PGP Key': "'" + order_data.get('pgp_key'),
         'Encrypted Messages': "'" + "\n\n".join(order_data.get('encrypted_messages', [])),
         'Plaintext Messages': "'" + "\n\n".join(order_data.get('plaintext_messages', [])),
+
     }
 
 
