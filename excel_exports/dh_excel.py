@@ -23,14 +23,21 @@ def append_order_to_excel(order_data):
         'Item Price (USD)': order_data.get('item_price_usd'),
         'Shipping Cost (XMR)': order_data.get('shipping_price_xmr'),
         'Shipping Cost (USD)': order_data.get('shipping_price_usd'),
+        'Shipping Carrier': order_data.get('carrier'),
+        'Shipping Service': order_data.get('service'),
+        'Shipping Rate (USD)': order_data.get('rate'),
+        'Tracking Code': order_data.get('tracking_code'),
+        'Tracking URL': order_data.get('tracking_url'),
+        'Label URL': order_data.get('label_url'),
         'Total Price (XMR)': order_data.get('total_price_xmr'),
         'Total Price (USD)': order_data.get('total_price_usd'),
         'PGP Fingerprint': order_data.get('pgp_fingerprint'),
         # Explicitly prefix PGP key/messages to force text
         'PGP Key': "'" + order_data.get('pgp_key'),
         'Encrypted Messages': "'" + "\n\n".join(order_data.get('encrypted_messages', [])),
-        'Plaintext Messages': "'" + "\n\n".join(order_data.get('plaintext_messages', []))
+        'Plaintext Messages': "'" + "\n\n".join(order_data.get('plaintext_messages', [])),
     }
+
 
     # Append or create Excel file
     if os.path.exists(EXCEL_FILE):

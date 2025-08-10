@@ -55,12 +55,19 @@ def main():
     for key, value in order_data.items():
         print(f"{key}: {value}")
 
+    # Import and run market-specific Shipping
+    shipping_module = import_module(f'shipping.{market.lower()}_shipping')
+    shipping_details = shipping_module.create_shipment(order_data)
+    # Update order_data to include shipping details explicitly
+    order_data.update(shipping_details)
+
     # Import and run the market-specific Excel exporter
     excel_module = import_module(f'excel_exports.{market.lower()}_excel')
     excel_module.append_order_to_excel(order_data)
     # Import and run market-specific PDF exporter
     pdf_module = import_module(f'pdf_exports.{market.lower()}_pdf')
     pdf_module.generate_pdf(order_data)
+
 
 
 if __name__ == "__main__":
